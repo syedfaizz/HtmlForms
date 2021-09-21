@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/userRegister.css">
+    <title>User registration</title>
+</head>
+<body>
+    <form action="" onsubmit="handleOnSubmit()">
+        <header class="headerContainer" >
+            <h1>
+                HTML5 Form Input Fields
+            </h1>
+        </header>
+        <div>
+            <label for="text">Text input type for name: </label>
+            <input type="text" name="text" id="text" placeholder="Enter your name" required>
+            <error-output class="text-error" for= "text"></error-output>
+        </div>
+        <div>
+            <label for="pwd">Password input type: </label>
+            <input type="password" name="pwd" id="pwd" placeholder="Enter your password" required>
+            <error-output class="password-error" for= "pwd"></error-output>
+        </div>
+        <div>
+            <label for="email">Email input type: </label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+            <error-output class="email-error" for= "email"></error-output>
+        </div>
+        <div>
+            <label for="url">URl input type: </label>
+            <input type="url" name="url" id="url" placeholder="Enter your URL">
+        </div>
+        <div>
+            <label for="number">Number input type: </label>
+            <input type="number" name="number" id="number" placeholder="Enter your Number" required>
+        </div>
+        <div>
+            <label for="phone">Mobile No input type: </label>
+            <input type="tel" name="tel" id="tel" placeholder="Enter your Mobile No">
+            <error-output class="number-error" for= "phone"></error-output>
+        </div>
+        <div>
+            <label for="search">Search input type: </label>
+            <input type="search" name="search" id="search" placeholder="Enter text to search">
+        </div>
+        <div class="nativeDateTimePicker">
+            <label for="startDate">Choose Date And Time</label>
+            <input type="datetime-local" name="startDate" id="startDate" required>
+        </div>
+        <div>
+            <label for="salary">Choose your salary</label>
+            <input type="range" name="salary" id="salary" min="300000"
+            max="500000" step="100" value="400000">
+            <output class="salary-output" for="salary">40000</output>
+        </div>
+        <div>
+            <button type="submit">
+                submit
+            </button>
+        </div>
+    </form>
+    <script>
+
+        //regex check for name
+        const text = document.querySelector('#text');
+        const textError = document.querySelector('.text-error');
+        text.addEventListener('input', function() {
+            let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z]{2,}$');
+            if (nameRegex.test(text.value)) {
+                textError.textContent = "";
+            }
+            else {
+                textError.textContent = "Name is incorrect";
+            }
+        });
+
+        // UC-2 regex check for email
+        const email = document.querySelector('#email');
+        const emailError = document.querySelector('.email-error');
+        email.addEventListener('input', function(){ 
+            let emailRegex = RegExp('^[a][b][c][.][a-z]{3}@[b][l][.][c][o][.][a-z]{2}$');
+            if (emailRegex.test(email.value)) {
+                emailError.textContent = "";
+            } else {
+                emailError.textContent = "Email is incorrect";
+            }
+        });
+
+        // regex check for phone number
+        const phone = document.querySelector('#tel');
+        const phoneError = document.querySelector('.number-error');
+        phone.addEventListener('input', function(){ 
+            let phoneRegex = RegExp('^[9][1] [6-9]{1}[0-9]{9}$');
+            if (phoneRegex.test(tel.value)) {
+                phoneError.textContent = "";
+            } else {
+                phoneError.textContent = "Phone number is incorrect";
+            }
+        });
+
+        //regex check for password
+        const password = document.querySelector('#pwd');
+        const passwordError = document.querySelector('.password-error');
+        password.addEventListener('input', function(){
+            let passwordRegex = RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+            if (passwordRegex.test(password.value)) {
+                passwordError.textContent = "";
+            } else {
+                passwordError.textContent = "Password is incorrect";
+            }
+        });
+
+        const salary = document.querySelector('#salary');
+        const output = document.querySelector('.salary-output');
+        output.textContent = salary.value;
+        salary.addEventListener('input', function() {
+            output.textContent = salary.value;
+        });
+
+        function handleOnSubmit() {
+            alert("Thanks! " + text.value + " ,Your form is Submitted successfully")
+        }
+    </script>
+</body>
+</html>
